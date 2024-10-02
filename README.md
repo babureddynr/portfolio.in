@@ -9,7 +9,7 @@ Welcome to my personal portfolio website! This project showcases my skills, proj
 
 ## 🖼️ Screenshots
 
-![Homepage](https://via.placeholder.com/800x400?text=Homepage+Screenshot)  
+![Homepage](https://github.com/babureddynr/portfolio.in/blob/main/home-Screenot.png)  
 _A sneak peek at the homepage_
 
 ---
