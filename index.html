@@ -6,7 +6,7 @@
     <title>Babu Reddy NR - Full Stack Developer</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-       :root {
+   :root {
     --primary-color: #2563eb;
     --secondary-color: #1e40af;
     --accent-color: #3b82f6;
@@ -23,6 +23,7 @@
 
 html {
     scroll-behavior: smooth;
+    font-size: 16px;
 }
 
 body {
@@ -51,7 +52,7 @@ body {
 }
 
 .logo {
-    font-size: 1.8rem;
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
     font-weight: bold;
     color: var(--primary-color);
     text-decoration: none;
@@ -68,6 +69,7 @@ body {
     padding: 0.5rem 1rem;
     transition: color 0.3s;
     font-weight: 500;
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
 }
 
 .nav-links li a:hover {
@@ -84,25 +86,27 @@ body {
     background-position: center;
     background-attachment: fixed;
     color: white;
-    padding-top: 60px;
+    padding: 80px 20px 20px;
 }
 
 .home-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 5%;
+    width: 100%;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 2rem;
 }
 
 .home-content {
-    flex: 1;
+    flex: 1 1 300px;
     max-width: 600px;
 }
 
 .home-content h1 {
-    font-size: 3.5rem;
+    font-size: clamp(2rem, 5vw, 3.5rem);
     margin-bottom: 1rem;
     background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
     -webkit-background-clip: text;
@@ -110,10 +114,9 @@ body {
 }
 
 .profile-img {
-    width: 300px;
-    height: 300px;
+    width: min(300px, 80vw);
+    height: min(300px, 80vw);
     border-radius: 50%;
-    margin-left: 2rem;
     border: 5px solid var(--primary-color);
     box-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
 }
@@ -121,7 +124,7 @@ body {
 /* Button Styling */
 .btn {
     display: inline-block;
-    padding: 1rem 2rem;
+    padding: clamp(0.8rem, 2vw, 1rem) clamp(1.5rem, 3vw, 2rem);
     background-color: var(--primary-color);
     color: white;
     text-decoration: none;
@@ -131,17 +134,18 @@ body {
     border: 2px solid transparent;
     margin-right: 1rem;
     margin-top: 1rem;
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
 }
 
 .btn:hover {
     background-color: transparent;
-    color: black;
+    color: var(--primary-color);
     border-color: var(--primary-color);
 }
 
 /* Section Styling */
 section {
-    padding: 5rem 5%;
+    padding: clamp(3rem, 8vw, 5rem) clamp(20px, 5%, 50px);
 }
 
 .section-container {
@@ -150,8 +154,8 @@ section {
 }
 
 .section-title {
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    margin-bottom: clamp(2rem, 5vw, 3rem);
     text-align: center;
     color: var(--primary-color);
 }
@@ -159,14 +163,14 @@ section {
 /* Skills Section Styling */
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+    gap: clamp(1rem, 3vw, 2rem);
 }
 
 .skill-card {
     background-color: white;
     border-radius: 10px;
-    padding: 2rem;
+    padding: clamp(1.5rem, 4vw, 2rem);
     text-align: center;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
@@ -177,8 +181,8 @@ section {
 }
 
 .skill-icon {
-    width: 80px;
-    height: 80px;
+    width: clamp(60px, 8vw, 80px);
+    height: clamp(60px, 8vw, 80px);
     margin: 0 auto 1rem;
     display: flex;
     align-items: center;
@@ -188,24 +192,24 @@ section {
 }
 
 .skill-icon i {
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
     color: var(--primary-color);
 }
 
 .skill-title {
-    font-size: 1.2rem;
+    font-size: clamp(1.1rem, 2vw, 1.2rem);
     margin-bottom: 0.5rem;
 }
 
 .skill-description {
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 1.5vw, 0.9rem);
     color: #666;
 }
 
 /* Education Timeline Styling */
 .timeline-item {
     margin-bottom: 2rem;
-    padding-left: 2rem;
+    padding-left: clamp(1.5rem, 4vw, 2rem);
     position: relative;
 }
 
@@ -235,7 +239,7 @@ section {
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    padding: 2rem;
+    padding: clamp(1.5rem, 4vw, 2rem);
     margin-bottom: 2rem;
     transition: transform 0.3s;
 }
@@ -248,21 +252,24 @@ section {
 .contact-info, .contact-form {
     max-width: 600px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: clamp(1.5rem, 4vw, 2rem);
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
-    text-align: center;
 }
 
 .contact-info:hover, .contact-form:hover {
     transform: translateY(-10px);
 }
 
-/* Contact Information Styling */
+.contact-info {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
 .contact-info p {
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 1.5vw, 1.1rem);
     margin-bottom: 1rem;
     color: var(--text-color);
 }
@@ -282,51 +289,31 @@ section {
     margin-bottom: 1.5rem;
 }
 
-.contact-form input, .contact-form textarea {
+.contact-form input, 
+.contact-form textarea {
     width: 100%;
     padding: 1rem;
     border: 1px solid #ddd;
     border-radius: 5px;
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
     background-color: var(--light-bg);
     color: var(--text-color);
     transition: border-color 0.3s ease;
 }
 
-.contact-form input:focus, .contact-form textarea:focus {
+.contact-form input:focus, 
+.contact-form textarea:focus {
     outline: none;
     border-color: var(--primary-color);
 }
 
-button.btn {
-    width: 100%;
-    padding: 1rem;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button.btn:hover {
-    background-color: var(--accent-color);
-}
-
 /* Footer Styling */
 footer {
-    background-color: #000;
-    color: #fff;
+    background-color: var(--dark-bg);
+    color: white;
     text-align: center;
-    padding: 2rem 0;
-    font-size: 1rem;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
-
-footer p {
-    margin: 0;
+    padding: clamp(1.5rem, 4vw, 2rem) 0;
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
 }
 
 footer a {
@@ -339,222 +326,62 @@ footer a:hover {
     color: var(--primary-color);
 }
 
-/* Media Queries for Responsiveness */
-@media (max-width: 1200px) {
-    .home-content h1 {
-        font-size: 3rem;
-    }
-
-    .profile-img {
-        width: 250px;
-        height: 250px;
-    }
-}
-
+/* Responsive adjustments */
 @media (max-width: 768px) {
     .nav-container {
         flex-direction: column;
     }
 
     .nav-links {
-        flex-direction: column;
-    }
-
-    .profile-img {
-        width: 200px;
-        height: 200px;
-    }
-
-    .home-content h1 {
-        font-size: 2.5rem;
-    }
-
-    .skills-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    }
-
-    .timeline-item {
-        padding-left: 1rem;
-    }
-
-    .contact-info, .contact-form {
-        padding: 1.5rem;
-    }
-
-    button.btn {
-        width: 100%;
-    }
-
-    .nav-links {
-        display: none; /* Hide navigation links for small screens */
-    }
-
-    .nav-container {
+        margin-top: 1rem;
         justify-content: center;
-    }
-
-    .home-content {
-        text-align: center;
-        flex: 1;
-    }
-}
-
-@media (max-width: 576px) {
-    .home-content h1 {
-        font-size: 2rem;
-    }
-
-    .profile-img {
-        width: 180px;
-        height: 180px;
+        flex-wrap: wrap;
     }
 
     .home-container {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+
+    .contact-info, .contact-form {
+        margin: 1rem;
+    }
+}
+
+/* Mobile menu */
+.mobile-menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        width: 100%;
+    }
+
+    .nav-links.active {
+        display: flex;
         flex-direction: column;
         align-items: center;
     }
 
-    .nav-container {
-        padding: 1rem;
-    }
-
-    .nav-links {
-        display: block;
-        margin-top: 1rem;
+    .nav-links li {
+        width: 100%;
+        text-align: center;
     }
 
     .nav-links li a {
-        padding: 0.5rem 1rem;
-    }
-
-    .skills-grid {
-        grid-template-columns: 1fr; /* Stacked layout for very small screens */
-    }
-
-    .timeline-item {
-        padding-left: 0;
-    }
-
-    .contact-info, .contact-form {
-        padding: 1rem;
-    }
-
-    footer {
-        font-size: 0.875rem;
-    }
-
-    button.btn {
+        display: block;
         padding: 0.8rem;
     }
 }
-
- 
-/* Navbar Styling */
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 5%;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: var(--primary-color);
-    text-decoration: none;
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-}
-
-.nav-links li {
-    display: inline-block;
-}
-
-.nav-links li a {
-    color: var(--text-color);
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    transition: color 0.3s;
-    font-weight: 500;
-}
-
-.nav-links li a:hover {
-    color: var(--primary-color);
-}
-
-/* Hamburger Menu Styles */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    padding: 10px;
-    margin-right: 1rem;
-    z-index: 1001;
-}
-
-.hamburger span {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background-color: var(--primary-color);
-    margin: 5px auto;
-    transition: 0.3s;
-}
-
-/* Media Queries for Small Screens */
-@media (max-width: 768px) {
-    /* Hide navbar links */
-    .nav-links {
-        display: none;
-        width: 100%;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        background-color: rgba(255, 255, 255, 0.95);
-        z-index: 1000;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    /* Display the hamburger menu */
-    .hamburger {
-        display: flex;
-    }
-
-    /* When hamburger is clicked, show the nav links */
-    .nav-links.active {
-        display: flex;
-    }
-
-    .nav-links li {
-        text-align: center;
-        padding: 1rem 0;
-        width: 100%;
-    }
-
-    .nav-links li a {
-        padding: 1rem 0;
-    }
-
-    .nav-links li a:hover {
-        color: var(--primary-color);
-    }
-}
-
 
     </style>
 </head>
@@ -570,14 +397,8 @@ footer a:hover {
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
         </div>
     </nav>
-    
 
     <section id="home" class="home">
         <div class="home-container">
@@ -741,26 +562,36 @@ footer a:hover {
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Redirect to home (top of the page) on reload if there's a hash in the URL
+            if (window.location.hash) {
+                window.history.replaceState(null, null, window.location.pathname);
+            }
+    
             // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
+                anchor.addEventListener('click', function(e) {
                     e.preventDefault();
+                    
+                    // Smoothly scroll to the target section
                     document.querySelector(this.getAttribute('href')).scrollIntoView({
                         behavior: 'smooth'
                     });
+    
+                    // Remove the hash from the URL after scrolling
+                    history.pushState(null, null, ' ');
                 });
             });
         });
-
-
-        const hamburger = document.getElementById('hamburger');
-    const navLinks = document.querySelector('.nav-links');
-
-    hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
-
-        
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+    
+            mobileMenuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+        });
     </script>
+    
 </body>
 </html>
