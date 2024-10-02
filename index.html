@@ -1,89 +1,551 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Babu Reddy NR - Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Babu Reddy NR - Full Stack Developer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-color: #333;
+            --light-bg: #f3f4f6;
+            --dark-bg: #1f2937;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+        
+        /* Navbar Styling */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .nav-links li a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Home Section Styling */
+        .home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(0,0,0,0.7)), url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            padding-top: 60px;
+        }
+        
+        .home-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .home-content {
+            flex: 1;
+            max-width: 600px;
+        }
+        
+        .home-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            margin-left: 2rem;
+            border: 5px solid var(--primary-color);
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
+        }
+
+        /* Button Styling */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-weight: 500;
+            border: 2px solid transparent;
+            margin-right: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: transparent;
+            color: black;
+            border-color: var(--primary-color);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 5rem 5%;
+        }
+        
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        /* About Section Styling */
+        .about {
+            background-color: var(--light-bg);
+        }
+
+        /* Skills Section Styling */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .skill-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .skill-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--light-bg);
+            border-radius: 50%;
+        }
+        
+        .skill-icon i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+        
+        .skill-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .skill-description {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Education Timeline Styling */
+        .timeline-item {
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background-color: var(--primary-color);
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+        }
+
+        /* Project Card Styling */
+        .project-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* /contact  */
+
+/* Contact Section Styling */
+.contact-info, .contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+/* Hover effect to match card hover behavior */
+.contact-info:hover, .contact-form:hover {
+    transform: translateY(-10px);
+}
+
+/* Contact Information Styling */
+.contact-info p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.contact-info a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: var(--accent-color);
+}
+
+/* Form Styling */
+.contact-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: var(--light-bg);
+    color: var(--text-color);
+    transition: border-color 0.3s ease;
+}
+
+.contact-form input:focus, .contact-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+button.btn {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.btn:hover {
+    background-color: var(--accent-color);
+}
+
+/* Add spacing for better alignment */
+.contact-section {
+    padding: 5rem 5%;
+    background-color: var(--light-bg);
+}
+
+/* Footer Styling */
+footer {
+    background-color: #000; /* Black background */
+    color: #fff; /* White text color */
+    text-align: center;
+    padding: 2rem 0; /* Padding for spacing */
+    font-size: 1rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0; /* Remove margin */
+}
+
+footer a {
+    color: var(--accent-color); /* Accent color for any links in the footer */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: var(--primary-color); /* Primary color on hover */
+}
+
+
+        
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Babu Reddy NR</h1>
-        <nav>
-            <ul>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">BR</a>
+            <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#education">Education</a></li>
-                <li><a href="#project">Project</a></li>
+                <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
-    <section id="home">
-        <img src="./profile-firefly.png" alt="Profile Picture" class="profile-pic">
-        <p class="summary">
-            Highly motivated and results-oriented Computer Applications graduate with a strong foundation in web development (HTML, CSS, JavaScript, React.js), Java programming (OOP concepts), and software development methodologies. Eager to leverage technical skills and innovative ideas to contribute to a fast-paced and dynamic IT environment.
-        </p>
+    <section id="home" class="home">
+        <div class="home-container">
+            <div class="home-content">
+                <h1>Babu Reddy NR</h1>
+                <p>Full Stack Developer</p>
+                <p>Passionate about creating efficient and scalable web applications</p>
+                <div class="btn-group">
+                    <a href="C:\Users\reddy\OneDrive\Desktop\BabaReddy-Nr_Portfolio_2024\BabuReddyNR_CV_2024,.pdf" class="btn" download>Download Resume</a>
+                    <a href="https://github.com/babureddynr" class="btn">
+                        <i class="fab fa-github"></i> GitHub
+                        <a href="http://linkedin.com/in/babu-reddy-nr-40a0b02b9" class="btn">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                </div>
+            </div>
+            <img src="profile-firefly.png" alt="Babu Reddy NR" class="profile-img">
+        </div>
     </section>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Date of Birth: 2002-05-03</p>
-        <p>Gender: Male</p>
+    <section id="about" class="about">
+        <div class="section-container">
+            <h2 class="section-title">About Me</h2>
+            <p>A motivated Computer Applications graduate with expertise in full-stack development. Passionate about creating efficient and user-friendly web applications.</p>
+            <div style="margin-top: 2rem;">
+                <p><strong>Date of Birth:</strong> 03-05-2002</p>
+                <p><strong>Email:</strong> babunrnr5@gmail.com</p>
+                <p><strong>Location:</strong>  Naravamakalahalli Village, Srinivaspur, Kolar 563135</p>
+            </div>
+        </div>
     </section>
 
     <section id="skills">
-        <h2>Skills</h2>
-        <h3>Technical Skills</h3>
-        <ul>
-            <li>Web Development: Proficient in HTML5, CSS3, JavaScript, and React.js.</li>
-            <li>Java: Core Java, collections, Hibernate, JDBC, Servlets, Spring with good knowledge of Java programming.</li>
-            <li>Databases: Exposure to SQL concepts and database management.</li>
-        </ul>
-        <h3>Soft Skills</h3>
-        <ul>
-            <li>Problem-solving: Adept at identifying, analyzing, and resolving complex technical issues.</li>
-            <li>Analytical Thinking: Strong ability to analyze data, identify patterns, and develop solutions.</li>
-            <li>Communication: Effective communication skills, both written and verbal.</li>
-            <li>Teamwork: Collaborative and team-oriented, with a proven ability to work effectively within a team environment.</li>
-        </ul>
+        <div class="section-container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <h3 class="skill-title">HTML5</h3>
+                    <p class="skill-description">Semantic markup and modern web standards</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-css3-alt"></i>
+                    </div>
+                    <h3 class="skill-title">CSS3</h3>
+                    <p class="skill-description">Responsive design and animations</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-js"></i>
+                    </div>
+                    <h3 class="skill-title">JavaScript</h3>
+                    <p class="skill-description">Dynamic and interactive web applications</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fab fa-java"></i>
+                    </div>
+                    <h3 class="skill-title">Java</h3>
+                    <p class="skill-description">Object-oriented programming and applications</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="skill-title">MySQL</h3>
+                    <p class="skill-description">Database design and management</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <h3 class="skill-title">JDBC</h3>
+                    <p class="skill-description">Java database connectivity</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3 class="skill-title">Spring Boot</h3>
+                    <p class="skill-description">Java-based framework for web applications</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3 class="skill-title">Servlets</h3>
+                    <p class="skill-description">Java web components for dynamic content</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                    <h3 class="skill-title">Hibernate</h3>
+                    <p class="skill-description">ORM framework for Java applications</p>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section id="education">
-        <h2>Education</h2>
-        <ul>
-            <li>Sri Gokul College, Kolar (2020-2023): Bachelor of Computer Applications (83.78%)</li>
-            <li>Vision India PU College, Ronour Cross (2018-2020): PUC-EBACS (88.16%)</li>
-            <li>GHS High School, Ronour (2015-2018): High School (88.32%)</li>
-        </ul>
+        <div class="section-container">
+            <h2 class="section-title">Education</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Bachelor of Computer Applications</h3>
+                    <p>Sri Gokul College, Kolar</p>
+                    <p>Percentage: 83.78%</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>PUC-EBACS</h3>
+                    <p>Vision India PU College</p>
+                    <p>Percentage: 88.16%</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>High School</h3>
+                    <p>GHS High School</p>
+                    <p>Percentage: 88.32%</p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="project">
-        <h2>Project: Men Salon Management System</h2>
-        <p>Project Description: Developed a Men Salon Management System as an individual project. The system was designed to streamline the operations of a men’s salon, including appointment scheduling, staff management, and inventory control.</p>
-        <p>Technologies Used: HTML, CSS, JavaScript, React.js, Bootstrap for the frontend, Java as the middleware, and MySQL for the backend. IDE used: Eclipse.</p>
-        <p>Role: As an individual project, I was responsible for all aspects of the project, from initial design and database setup to frontend development and final testing.</p>
-        <p>Outcome: The project was well-received, with particular appreciation from the Head of Department for its robust functionality and user-friendly interface.</p>
+    <section id="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="project-card">
+            <h3>Men Salon Management System</h3>
+            <p>A comprehensive system for managing salon operations, appointments, and customer data.</p>
+            <p><strong>Technologies used:</strong> HTML, CSS, JavaScript, Bootstrap, Java, MySQL</p>
+            <p><strong>Role:</strong> Full-stack development, database design, and implementation of core features</p>
+            <a href="MEN-SALON-MANAGENT-SYSTEM-REPORT.pdf" class="btn">View Project</a>
+        </div>
     </section>
-
     <section id="contact">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:babunrnr5@gmail.com">babunrnr5@gmail.com</a></p>
-        <p>Location: Naravamakalahalli Village, Srinivaspur, Kolar 563135</p>
-        <p>Phone: +91 7019283737</p>
-        <p>GitHub: <a href="https://github.com/babureddynr" target="_blank">github.com/babureddynr</a></p>
-        <p>Resume: <a href="BabuReddyNR_CV_2024.pdf" download>Download My Resume</a></p>
+        <h2 class="section-title">Contact Me</h2>
+        <div class="contact-info">
+            <p><strong>Name:</strong> Babu Reddy NR</p>
+            <p><strong>Phone:</strong> <a href="tel:+917019283737">+91 7019283737</a></p>
+            <p><strong>Email:</strong> <a href="mailto:babunrnr5@gmail.com">babunrnr5@gmail.com</a></p>
+            <p><strong>GitHub:</strong> <a href="https://github.com/babureddynr" target="_blank">github.com/babureddynr</a></p>
+            <p><strong>LinkedIn:</strong> <a href="http://linkedin.com/in/babu-reddy-nr-40a0b02b9" target="_blank">LinkedIn Profile</a></p>
+        </div>
     </section>
     
 
     <footer>
-        <p>&copy; 2024 Babu Reddy NR</p>
+        <p>&copy; 2024 Babu Reddy NR. All rights reserved.</p>
     </footer>
-    
-    <script src="scripts.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+
+        
+    </script>
 </body>
 </html>
