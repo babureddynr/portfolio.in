@@ -7,12 +7,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
    :root {
-    --primary-color: #2563eb;
-    --secondary-color: #1e40af;
-    --accent-color: #3b82f6;
-    --text-color: #333;
-    --light-bg: #f3f4f6;
-    --dark-bg: #1f2937;
+    --primary-color: #FF6500;
+    --secondary-color: #1E3E62;
+    --accent-color: #0B192C;
+    --text-color: #ffffff;
+    --dark-bg: #000000;
+    --light-bg: #1E3E62;
 }
 
 * {
@@ -30,6 +30,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--text-color);
+    background-color: var(--dark-bg);
 }
 
 /* Navbar Styling */
@@ -37,8 +38,8 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: var(--accent-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     z-index: 1000;
 }
 
@@ -77,19 +78,37 @@ body {
 }
 
 /* Home Section Styling */
+/* Home Section Styling */
 .home {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: linear-gradient(rgb(255, 255, 255), rgba(171, 171, 171, 0.7)), url('/api/placeholder/1920/1080');
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.6),  /* Reduced opacity for more visibility */
+        rgba(11, 25, 44, 0.7)  /* Reduced opacity for more visibility */
+    ), url('https://cdn.pixabay.com/photo/2017/08/05/12/58/computer-2583383_1280.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    color: rgb(0, 0, 0);
     padding: 80px 20px 20px;
+    position: relative;
+}
+
+.home::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(0.5px); /* Reduced blur for more clarity */
+    -webkit-backdrop-filter: blur(0.5px);
+    z-index: 1;
 }
 
 .home-container {
+    position: relative;
+    z-index: 2;
     max-width: 1400px;
     margin: 0 auto;
     width: 100%;
@@ -100,6 +119,10 @@ body {
     gap: 2rem;
 }
 
+/* Optional: Adjust text contrast for better readability against more visible background */
+.home-content p {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
 .home-content {
     flex: 1 1 300px;
     max-width: 600px;
@@ -108,7 +131,7 @@ body {
 .home-content h1 {
     font-size: clamp(2rem, 5vw, 3.5rem);
     margin-bottom: 1rem;
-    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -118,7 +141,7 @@ body {
     height: min(300px, 80vw);
     border-radius: 50%;
     border: 5px solid var(--primary-color);
-    box-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
+    box-shadow: 0 0 20px rgba(255, 101, 0, 0.5);
 }
 
 /* Button Styling */
@@ -126,7 +149,7 @@ body {
     display: inline-block;
     padding: clamp(0.8rem, 2vw, 1rem) clamp(1.5rem, 3vw, 2rem);
     background-color: var(--primary-color);
-    color: white;
+    color: var(--text-color);
     text-decoration: none;
     border-radius: 5px;
     transition: all 0.3s;
@@ -168,11 +191,11 @@ section {
 }
 
 .skill-card {
-    background-color: white;
+    background-color: var(--accent-color);
     border-radius: 10px;
     padding: clamp(1.5rem, 4vw, 2rem);
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     transition: transform 0.3s ease;
 }
 
@@ -187,7 +210,7 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--light-bg);
+    background-color: var(--secondary-color);
     border-radius: 50%;
 }
 
@@ -203,7 +226,7 @@ section {
 
 .skill-description {
     font-size: clamp(0.85rem, 1.5vw, 0.9rem);
-    color: #666;
+    color: #cccccc;
 }
 
 /* Education Timeline Styling */
@@ -236,9 +259,9 @@ section {
 
 /* Project Card Styling */
 .project-card {
-    background-color: white;
+    background-color: var(--accent-color);
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     padding: clamp(1.5rem, 4vw, 2rem);
     margin-bottom: 2rem;
     transition: transform 0.3s;
@@ -253,9 +276,9 @@ section {
     max-width: 600px;
     margin: 0 auto;
     padding: clamp(1.5rem, 4vw, 2rem);
-    background-color: white;
+    background-color: var(--accent-color);
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     transition: transform 0.3s ease;
 }
 
@@ -271,7 +294,6 @@ section {
 .contact-info p {
     font-size: clamp(1rem, 1.5vw, 1.1rem);
     margin-bottom: 1rem;
-    color: var(--text-color);
 }
 
 .contact-info a {
@@ -282,7 +304,7 @@ section {
 }
 
 .contact-info a:hover {
-    color: var(--accent-color);
+    color: var(--secondary-color);
 }
 
 .contact-form .form-group {
@@ -293,10 +315,10 @@ section {
 .contact-form textarea {
     width: 100%;
     padding: 1rem;
-    border: 1px solid #ddd;
+    border: 1px solid var(--accent-color);
     border-radius: 5px;
     font-size: clamp(0.9rem, 1.5vw, 1rem);
-    background-color: var(--light-bg);
+    background-color: var(--secondary-color);
     color: var(--text-color);
     transition: border-color 0.3s ease;
 }
@@ -309,21 +331,21 @@ section {
 
 /* Footer Styling */
 footer {
-    background-color: var(--dark-bg);
-    color: white;
+    background-color: var(--accent-color);
+    color: var(--text-color);
     text-align: center;
     padding: clamp(1.5rem, 4vw, 2rem) 0;
     font-size: clamp(0.9rem, 1.5vw, 1rem);
 }
 
 footer a {
-    color: var(--accent-color);
+    color: var(--primary-color);
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 footer a:hover {
-    color: var(--primary-color);
+    color: var(--secondary-color);
 }
 
 /* Responsive adjustments */
@@ -382,7 +404,6 @@ footer a:hover {
         padding: 0.8rem;
     }
 }
-
     </style>
 </head>
 <body>
