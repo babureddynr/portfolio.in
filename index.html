@@ -7,8 +7,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
   :root {
-    /* Dark mode variables */
-    --primary-color: #FF6500;
+ /* Dark mode variables */
+ --primary-color: #FF6500;
     --secondary-color: #1E3E62;
     --accent-color: #0B192C;
     --text-color: #ffffff;
@@ -22,6 +22,7 @@
     --light-text-color: #333333;
     --light-dark-bg: #f5f5f5;
 }
+
 
 * {
     margin: 0;
@@ -42,52 +43,6 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-/* Navbar Styling */
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: var(--accent-color);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-    z-index: 1000;
-    transition: background-color 0.3s;
-}
-
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 5%;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.logo {
-    font-size: clamp(1.2rem, 2vw, 1.8rem);
-    font-weight: bold;
-    color: var(--primary-color);
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-}
-
-.nav-links li a {
-    color: var(--text-color);
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    transition: color 0.3s;
-    font-weight: 500;
-    font-size: clamp(0.9rem, 1.5vw, 1rem);
-}
-
-.nav-links li a:hover {
-    color: var(--primary-color);
-}
-
 /* Home Section Styling */
 .home {
     min-height: 100vh;
@@ -103,6 +58,8 @@ body {
     padding: 80px 20px 20px;
     position: relative;
 }
+
+
 
 .home::before {
     content: '';
@@ -385,17 +342,100 @@ body.light-mode .skill-icon {
 }
 
 /* Project Card Styling */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
 .project-card {
     background-color: var(--accent-color);
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    padding: clamp(1.5rem, 4vw, 2rem);
-    margin-bottom: 2rem;
-    transition: transform 0.3s, background-color 0.3s;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
 }
 
 .project-card:hover {
     transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+.project-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.project-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.project-description {
+    margin-bottom: 1rem;
+    flex-grow: 1;
+}
+
+.project-tech {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.project-tech span {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.project-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.project-btn {
+    flex: 1;
+    text-align: center;
+    padding: 0.8rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-view {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-github {
+    background-color: #333;
+    color: white;
+}
+
+.btn-view:hover, .btn-github:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Light mode adjustments */
+body.light-mode .project-card {
+    background-color: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 /* Contact Section Styling */
@@ -545,7 +585,6 @@ body.light-mode footer {
 .skill-card:nth-child(7) { animation-delay: 0.7s; }
 .skill-card:nth-child(8) { animation-delay: 0.8s; }
 .skill-card:nth-child(9) { animation-delay: 0.9s; }
-
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .nav-container {
@@ -602,14 +641,224 @@ body.light-mode footer {
         padding: 0.8rem;
     }
 }
+
+/* Navbar Styling */
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+    }
+
+    .nav-links {
+        margin-top: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .home-container {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+
+    .contact-info, .contact-form {
+        margin: 1rem;
+    }
+}
+
+/* Mobile Menu */
+.mobile-menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        width: 100%;
+    }
+
+    .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links li a {
+        display: block;
+        padding: 0.8rem;
+        transition: color 0.3s ease; /* Smooth transition for color change */
+    }
+}
+
+/* Navbar Styling */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--accent-color);
+    z-index: 1000;
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for a floating effect */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transition for background and shadow */
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease; /* Smooth transition for logo color */
+}
+
+.logo:hover {
+    color: var(--accent-color); /* Change color on hover */
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    transition: opacity 0.3s ease; /* Smooth opacity change for the menu */
+}
+
+.nav-links li a {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition for color and hover animation */
+}
+
+.nav-links li a:hover {
+    color: var(--primary-color); /* Change color on hover */
+    transform: scale(1.1); /* Slight zoom effect */
+}
+
+.nav-links li a::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+    bottom: 0;
+    left: 0;
+    transform: scaleX(0);
+    transition: transform 0.3s ease; /* Line animation */
+}
+
+.nav-links li a:hover::after {
+    transform: scaleX(1); /* Line animates on hover */
+}
+
+/* Mobile menu button */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    position: absolute;
+    top: 10px; /* Move to the top */
+    left: 10px; /* Move to the left */
+    transition: transform 0.3s ease; /* Add hover animation */
+}
+
+.mobile-menu-btn:hover {
+    transform: rotate(90deg); /* Rotate icon on hover */
+}
+
+.mobile-menu-btn span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary-color);
+    margin: 5px 0;
+    transition: background-color 0.3s ease; /* Smooth transition for color */
+}
+
+.mobile-menu-btn:hover span {
+    background-color: var(--accent-color); /* Change color of hamburger bars on hover */
+}
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+        color: white;
+    }
+
+    .nav-links {
+        display: none;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: var(--accent-color);
+        flex-direction: column;
+        padding: 1rem 0;
+        opacity: 0; /* Start with the menu hidden */
+        transition: opacity 0.3s ease; /* Transition for menu display */
+    }
+
+    .nav-links.active {
+        display: flex;
+        opacity: 1; /* Make it visible when active */
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links li a {
+        display: block;
+        padding: 1rem;
+        transition: color 0.3s ease; /* Smooth transition for link color */
+    }
+
+    .nav-links li a:hover {
+        color: var(--primary-color); /* Change color on hover */
+    }
+}
+
+
     </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
             <a href="#" class="logo">BR</a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
+            <button class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul  class="nav-links">
+                <li style="color: white;"><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#education">Education</a></li>
@@ -618,6 +867,7 @@ body.light-mode footer {
             </ul>
         </div>
     </nav>
+    
 
     <section id="home" class="home">
         <div class="home-container">
@@ -759,16 +1009,133 @@ body.light-mode footer {
         </div>
     </section>
 
-    <section id="projects">
-        <h2 class="section-title">Projects</h2>
-        <div class="project-card">
-            <h3>Men Salon Management System</h3>
-            <p>A comprehensive system for managing salon operations, appointments, and customer data.</p>
-            <p><strong>Technologies used:</strong> HTML, CSS, JavaScript, Bootstrap, Java, MySQL</p>
-            <p><strong>Role:</strong> Full-stack development, database design, and implementation of core features</p>
-            <a href="MEN-SALON-MANAGENT-SYSTEM-REPORT.pdf" class="btn">View Project</a>
+   
+        
+        <section id="projects">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <img src="C:\Users\reddy\OneDrive\Desktop\portfolio\Screenshot 2024-10-11 165113.png" alt="Men Salon Management System" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Men Salon Management System</h3>
+                        <p class="project-description">A comprehensive system for managing salon operations, appointments, and customer data.</p>
+                        <div class="project-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                            <span>Php</span>
+                            <span>MySQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="MEN-SALON-MANAGENT-SYSTEM-REPORT.pdf" class="project-btn btn-view">View Project</a>
+                            <!-- <a href="#" class="project-btn btn-github">GitHub</a> -->
+                        </div>
+                    </div>
+                </div>
+        
+ <!-- Project 4 -->
+ <div class="project-card">
+    <img src="pizza-clone-home-page.png" alt="Cool pizza clone" class="project-image">
+    <div class="project-content">
+        <h3 class="project-title">Student Management System</h3>
+        <p class="project-description">🍕 Cool Pizza Website Clone 🌐 This is a simple clone of a Cool Pizza website.</p>
+        <div class="project-tech">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JavaScript</span>
+       
         </div>
-    </section>
+        <div class="project-links">
+            <a href="pizza-clone-home-page.png" class="project-btn btn-view">View Project</a>
+            <a href="https://github.com/babureddynr/Cool-Pizza-Website-Clone---HTML-CSS" class="project-btn btn-github">GitHub</a>
+        </div>
+    </div>
+</div>
+
+ <!-- Project 5 -->
+ <div class="project-card">
+    <img src="netflix-clone-homepage.png" alt="Netflix-clone-page" class="project-image">
+    <div class="project-content">
+        <h3 class="project-title">Netflix clone webpage</h3>
+        <p class="project-description">🎬 Netflix Clone - Single Page 🍿 This is a single-page Netflix homepage clone, created using HTML and CSS only.</p>
+        <div class="project-tech">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>javascript</span>
+       
+        </div>
+        <div class="project-links">
+            <a href="netflix-clone-homepage.png" class="project-btn btn-view">View Project</a>
+            <a href="https://github.com/babureddynr/NETFLIX-CLONE" class="project-btn btn-github">GitHub</a>
+        </div>
+    </div>
+</div>
+
+ <!-- Project 6 -->
+ <div class="project-card">
+    <img src="Bmw-cole.png" alt="Netflix-clone-page" class="project-image">
+    <div class="project-content">
+        <h3 class="project-title">BMW clone webpage</h3>
+        <p class="project-description">🚗 BMW Clone 🌐 This is a simple clone of the BMW website, designed to mimic the style and functionality of the official BMW page using HTML and CSS.</p>
+        <div class="project-tech">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>javascript</span>
+        </div>
+        <div class="project-links">
+            <a href="Bmw-cole.png" class="project-btn btn-view">View Project</a>
+            <a href="https://github.com/babureddynr/BMW_Clone" class="project-btn btn-github">GitHub</a>
+        </div>
+    </div>
+</div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <img src="Screenshot 2024-10-11 174716.png" alt="To-Do List Application" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">To-Do List Application</h3>
+                        <p class="project-description">This is a simple To-Do Management System built using Spring Boot for the back-end, and basic HTML, CSS, and JavaScript for the front-end. The application allows users to create
+                            To-do List.
+                        </p>
+                        <div class="project-tech">
+                            <span>Html</span>
+                            <span>Css</span>
+                            <span>JavaScript</span>
+                            <span>Java</span>
+                            <span>SpringBoot</span>
+                            <span>MySQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="Screenshot 2024-10-11 174716.png" class="project-btn btn-view">View Project</a>
+                            <a href="https://github.com/babureddynr/To-Do-Management-System-Spring-Boot-HTML-CSS-" class="project-btn btn-github">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <img src="Screenshot 2024-10-11 175451.png" alt="Men Salon Management System" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Student Management System</h3>
+                        <p class="project-description">This project demonstrates a simple CRUD application for managing students using Java, Spring Boot, and MySQL.</p>
+                        <div class="project-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                            <span>SpringBoot</span>
+                            <span>MySQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="Screenshot 2024-10-11 175451.png" class="project-btn btn-view">View Project</a>
+                            <a href="https://github.com/babureddynr/Student-Management-System---Spring-Boot-CRUD" class="project-btn btn-github">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                
+        
+            </div>
+        </section>
     <section id="contact">
         <h2 class="section-title">Contact Me</h2>
         <div class="contact-info">
@@ -821,20 +1188,24 @@ body.light-mode footer {
         document.addEventListener('DOMContentLoaded', function() {
         // Original JavaScript remains
 
-        // Dark mode toggle functionality
-        const themeToggle = document.querySelector('.theme-toggle');
-        const themeIcon = themeToggle.querySelector('i');
-        
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('light-mode');
-            if (document.body.classList.contains('light-mode')) {
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-            } else {
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-            }
-        });
+     // Dark mode toggle functionality
+const themeToggle = document.querySelector('.theme-toggle');
+const themeIcon = themeToggle.querySelector('i');
+
+// Set default theme to light mode
+document.body.classList.add('light-mode');  // Ensure the body starts with light mode
+
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    if (document.body.classList.contains('light-mode')) {
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+    } else {
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+    }
+});
+
 
         // Intersection Observer for fade-in animations
         const observerOptions = {
@@ -858,6 +1229,23 @@ body.light-mode footer {
             observer.observe(section);
         });
     });
+
+    //hamburger
+    document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+
+    mobileMenuBtn.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+    });
+
+    // Close menu when clicking a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', function() {
+            navLinks.classList.remove('active');
+        });
+    });
+});
     </script>
     
 </body>
