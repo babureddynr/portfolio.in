@@ -858,12 +858,13 @@ body.light-mode footer {
                 <span></span>
             </button>
             <ul  class="nav-links">
-                <li style="color: white;"><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li style="color: rgb(255, 89, 0);"><a style="color: rgb(255, 68, 0);" href="#home">Home</a></li>
+                <li><a style="color: rgb(255, 68, 0);" href="#about">About</a></li>
+                <li><a style="color: rgb(255, 68, 0);" href="#skills">Skills</a></li>
+                <li><a style="color: rgb(255, 68, 0);" href="#experience">Experience</a></li>
+                <li><a style="color: rgb(255, 68, 0);" href="#education">Education</a></li>
+                <li><a style="color: rgb(255, 68, 0);" href="#projects">Projects</a></li>
+                <li><a style="color: rgb(255, 68, 0);" href="#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -985,6 +986,18 @@ body.light-mode footer {
         </div>
     </section>
     
+    <section id="experience">
+        <div class="section-container">
+            <h2 class="section-title">Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Trainee Developer</h3>
+                    <p>Bluetree Consultancy Services Private Limited</p>
+                    <p>Experience: <span id="experience-duration"></span></p>
+                </div>
+            </div>
+        </div>
+    </section>
     
     <section id="education">
         <div class="section-container">
@@ -1215,7 +1228,7 @@ body.light-mode footer {
         <h2 class="section-title">Contact Me</h2>
         <div class="contact-info">
             <p><strong>Name:</strong> Babu Reddy NR</p>
-            <p><strong>Phone:</strong> <a href="tel:+917019283737">+91 7019283737</a></p>
+            <p><strong>Phone:</strong> <a href="tel:+917019283737">+91 701928xxxx</a></p>
             <p><strong>Email:</strong> <a href="mailto:babunrnr5@gmail.com">babunrnr5@gmail.com</a></p>
             <p><strong>GitHub:</strong> <a href="https://github.com/babureddynr" target="_blank">github.com/babureddynr</a></p>
             <p><strong>LinkedIn:</strong> <a href="http://linkedin.com/in/babu-reddy-nr-40a0b02b9" target="_blank">LinkedIn Profile</a></p>
@@ -1321,7 +1334,26 @@ themeToggle.addEventListener('click', () => {
         });
     });
 });
+
+
     </script>
+    <script>
+        // JavaScript to calculate the experience dynamically
+        function calculateExperience(joinDate) {
+            const startDate = new Date(joinDate); // Joining date
+            const currentDate = new Date(); // Current date
+            const diffInMs = currentDate - startDate;
+            
+            // Calculate years and months
+            const years = Math.floor(diffInMs / (1000 * 60 * 60 * 24 * 365.25));
+            const months = Math.floor((diffInMs % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.4375));
+            
+            // Return formatted experience
+            return `${years} years and ${months} months`;
+        }
     
+        // Set the experience duration
+        document.getElementById('experience-duration').textContent = calculateExperience('2024-11-06'); // Joining date (YYYY-MM-DD)
+    </script>
 </body>
 </html>

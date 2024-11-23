@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Age Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #12c2e9, #c471ed, #f64f59);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 600px;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideIn 0.8s ease forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            background: linear-gradient(45deg, #12c2e9, #c471ed, #f64f59);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .input-group {
+            margin-bottom: 2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-size: 1.1rem;
+        }
+
+        input[type="date"] {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        input[type="date"]:focus {
+            border-color: #c471ed;
+            outline: none;
+            box-shadow: 0 0 10px rgba(196, 113, 237, 0.3);
+        }
+
+        .age-display {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .time-unit {
+            display: inline-block;
+            font-weight: bold;
+            color: #c471ed;
+            min-width: 2.5ch;
+            text-align: center;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .invalid-date {
+            color: #f64f59;
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            opacity: 0;
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .age-display {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dynamic Age Calculator</h1>
+        <div class="input-group">
+            <label for="dob">Enter your Date of Birth:</label>
+            <input type="date" id="dob" required>
+        </div>
+        <div id="age-display" class="age-display">
+            Select your date of birth to see your age
+        </div>
+    </div>
+
+    <script>
+        const dobInput = document.getElementById('dob');
+        const ageDisplay = document.getElementById('age-display');
+        let intervalId;
+
+        function formatNumber(num) {
+            return num < 10 ? '0' + num : num;
+        }
+
+        function calculateAge() {
+            const dob = new Date(dobInput.value);
+            const now = new Date();
+
+            if (dob > now) {
+                ageDisplay.innerHTML = '<div class="invalid-date">Date of birth cannot be in the future!</div>';
+                return;
+            }
+
+            const timeDiff = now - dob;
+
+            // Calculate years
+            const years = Math.floor(timeDiff / (365.25 * 24 * 60 * 60 * 1000));
+            
+            // Calculate remaining days
+            const yearMilliseconds = years * 365.25 * 24 * 60 * 60 * 1000;
+            const remainingMilliseconds = timeDiff - yearMilliseconds;
+            const days = Math.floor(remainingMilliseconds / (24 * 60 * 60 * 1000));
+            
+            // Calculate hours, minutes, seconds
+            const remainingTime = now - (dob.getTime() + years * 365.25 * 24 * 60 * 60 * 1000 + days * 24 * 60 * 60 * 1000);
+            const hours = Math.floor(remainingTime / (60 * 60 * 1000));
+            const minutes = Math.floor((remainingTime % (60 * 60 * 1000)) / (60 * 1000));
+            const seconds = Math.floor((remainingTime % (60 * 1000)) / 1000);
+
+            ageDisplay.innerHTML = `
+                <span class="time-unit">${years}</span> years 
+                <span class="time-unit">${days}</span> days 
+                <span class="time-unit">${formatNumber(hours)}</span> hours 
+                <span class="time-unit">${formatNumber(minutes)}</span> minutes 
+                <span class="time-unit">${formatNumber(seconds)}</span> seconds
+            `;
+        }
+
+        dobInput.addEventListener('change', () => {
+            if (intervalId) {
+                clearInterval(intervalId);
+            }
+            
+            // Reset animation by removing and re-adding the element
+            const oldDisplay = ageDisplay.innerHTML;
+            ageDisplay.style.animation = 'none';
+            ageDisplay.offsetHeight; // Trigger reflow
+            ageDisplay.style.animation = null;
+            
+            calculateAge();
+            intervalId = setInterval(calculateAge, 1000);
+        });
+
+        // Set max date to today
+        const today = new Date().toISOString().split('T')[0];
+        dobInput.max = today;
+    </script>
+</body>
+</html>
