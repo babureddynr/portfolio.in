@@ -999,6 +999,7 @@ body.light-mode footer {
         </div>
     </section>
     
+    
     <section id="education">
         <div class="section-container">
             <h2 class="section-title">Education</h2>
@@ -1340,20 +1341,22 @@ themeToggle.addEventListener('click', () => {
     <script>
         // JavaScript to calculate the experience dynamically
         function calculateExperience(joinDate) {
-            const startDate = new Date(joinDate); // Joining date
-            const currentDate = new Date(); // Current date
-            const diffInMs = currentDate - startDate;
-            
-            // Calculate years and months
-            const years = Math.floor(diffInMs / (1000 * 60 * 60 * 24 * 365.25));
-            const months = Math.floor((diffInMs % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.4375));
-            
-            // Return formatted experience
-            return `${years} years and ${months} months`;
-        }
+    const startDate = new Date(joinDate); // Joining date
+    const currentDate = new Date(); // Current date
+    const diffInMs = currentDate - startDate;
     
-        // Set the experience duration
-        document.getElementById('experience-duration').textContent = calculateExperience('2024-11-06'); // Joining date (YYYY-MM-DD)
+    // Calculate years, months, and days
+    const years = Math.floor(diffInMs / (1000 * 60 * 60 * 24 * 365.25));
+    const months = Math.floor((diffInMs % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.4375));
+    const days = Math.floor((diffInMs % (1000 * 60 * 60 * 24 * 30.4375)) / (1000 * 60 * 60 * 24));
+    
+    // Return formatted experience
+    return `${years} years, ${months} months, and ${days} days`;
+}
+
+// Set the experience duration
+document.getElementById('experience-duration').textContent = calculateExperience('2024-11-06'); // Joining date (YYYY-MM-DD)
+
     </script>
 </body>
 </html>
