@@ -82,8 +82,3 @@ You can reach me at:
 
 Made with ❤️ by **[Babu Reddy NR](https://github.com/babureddynr)**
 ```
-
-### Key Features:
-- **Icons**: To make it more visually appealing, I've added icons (you can replace placeholders with real image links).
-- **Screenshots**: You can add actual screenshots of your website instead of placeholders.
-- **Project Structure**: A clear explanation of the file and folder structure.
