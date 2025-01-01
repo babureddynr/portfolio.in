@@ -3,7 +3,7 @@
 
 Welcome to my personal portfolio website! This project showcases my skills, projects, and experiences. It was built using **HTML**, **CSS**, **JavaScript**, and **Bootstrap**, with a responsive and clean design that works beautifully on all devices.
 
-🚀 **[View Live Portfolio](https://babureddynr.xyz/)**
+🚀 **[BABUREDDYNR.XYZ](https://babureddynr.xyz/)**
 
 ---
 
