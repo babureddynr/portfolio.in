@@ -899,10 +899,62 @@ body.light-mode footer {
 .contact-form button:hover {
     background-color: var(--secondary-color); /* Change color on hover */
 }
+/* Dark mode styles for the contact form */
+body:not(.light-mode) .contact-form {
+    background-color: var(--dark-bg); /* Dark background */
+    color: var(--text-color); /* Light text color */
+}
 
+body:not(.light-mode) .contact-form input,
+body:not(.light-mode) .contact-form textarea,
+body:not(.light-mode) .contact-form select {
+    background-color: var(--accent-color); /* Dark input background */
+    color: var(--text-color); /* Light text color */
+    border: 1px solid var(--secondary-color); /* Adjust border color */
+}
+
+body:not(.light-mode) .contact-form input::placeholder,
+body:not(.light-mode) .contact-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6); /* Light placeholder text */
+}
+
+body:not(.light-mode) .contact-form button {
+    background-color: var(--secondary-color); /* Adjust button background */
+    color: var(--text-color); /* Light text color */
+}
+/* Parallax Effect for the Home Section */
+.home {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.6),
+        rgba(11, 25, 44, 0.7)
+    ), url('https://cdn.pixabay.com/photo/2017/08/05/12/58/computer-2583383_1280.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Enables parallax effect */
+    padding: 80px 20px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.home::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(0.5px);
+    -webkit-backdrop-filter: blur(0.5px);
+    z-index: 1;
+}
     </style>
 </head>
 <body>
+        <div class="wave-effect"></div>
     <nav class="navbar">
         <div class="nav-container">
             <a href="#" class="logo">BR</a>
@@ -924,7 +976,7 @@ body.light-mode footer {
     </nav>
     
 
-    <section id="home" class="home">
+      <section id="home" class="home">
         <div class="home-container">
             <div class="home-content">
                 <h1 class="animate-name">
@@ -946,15 +998,16 @@ body.light-mode footer {
                 <p style="color: #f5f5f5;">Passionate about creating efficient and scalable web applications</p>
                 <div class="btn-group">
                     <a href="BabuReddyNR_CV_2024,.pdf" class="btn download" download>Download Resume</a>
-
                     <a href="https://github.com/babureddynr" class="btn">
                         <i class="fab fa-github"></i> GitHub
-                        <a href="http://linkedin.com/in/babu-reddy-nr-40a0b02b9" class="btn">
-                            <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="http://linkedin.com/in/babu-reddy-nr-40a0b02b9" class="btn">
+                        <i class="fab fa-linkedin"></i> LinkedIn
                     </a>
                 </div>
             </div>
-            <img src="profile-firefly.png" alt="Babu Reddy NR" class="profile-img" loading="lazy">        </div>
+            <img src="profile-firefly.png" alt="Babu Reddy NR" class="profile-img" loading="lazy">
+        </div>
     </section>
 
     <section id="about" class="about">
@@ -1277,13 +1330,6 @@ body.light-mode footer {
         </section>
     <section id="contact">
         <h2 class="section-title">Contact Me</h2>
-        <div class="contact-info">
-            <p><strong>Name:</strong> Babu Reddy NR</p>
-            <p><strong>Phone:</strong> <a href="tel:+917019283737">+91 701928xxxx</a></p>
-            <p><strong>Email:</strong> <a href="mailto:babunrnr5@gmail.com">babunrnr5@gmail.com</a></p>
-            <p><strong>GitHub:</strong> <a href="https://github.com/babureddynr" target="_blank">github.com/babureddynr</a></p>
-            <p><strong>LinkedIn:</strong> <a href="http://linkedin.com/in/babu-reddy-nr-40a0b02b9" target="_blank">LinkedIn Profile</a></p>
-        </div>
         <form id="contact-form" class="contact-form" action="https://formspree.io/f/mrbppnly" method="POST">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" placeholder="Enter your name" required>
@@ -1409,9 +1455,6 @@ themeToggle.addEventListener('click', () => {
     });
 });
 
-
-    </script>
-    <script>
         // JavaScript to calculate the experience dynamically
         function calculateExperience(joinDate) {
     const startDate = new Date(joinDate); // Joining date
@@ -1443,7 +1486,33 @@ themeToggle.addEventListener('click', () => {
       document.getElementById('contact-form').addEventListener('submit', function (e) {
         alert('Thank you for your message! Your response has been recorded.');
     });
+document.getElementById('contact-form').addEventListener('submit', function (e) {
+    e.preventDefault(); // Prevent the default form submission
 
-    </script>
+    // Show a success message
+    alert('Thank you for your message! Your response has been recorded.');
+
+    // Refresh the page after a short delay
+    setTimeout(() => {
+        location.reload();
+    }, 1000); // 1-second delay before refreshing
+});
+
+    document.addEventListener('mousemove', function (e) {
+        const waveContainer = document.querySelector('.wave-effect');
+        const wave = document.createElement('div');
+        wave.className = 'wave';
+        wave.style.left = `${e.clientX}px`;
+        wave.style.top = `${e.clientY}px`;
+
+        waveContainer.appendChild(wave);
+
+        // Remove the wave after the animation ends
+        wave.addEventListener('animationend', () => {
+            wave.remove();
+        });
+    });
+</script>
+
 </body>
 </html>
