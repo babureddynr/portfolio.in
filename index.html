@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Babu Reddy NR - Full Stack Developer</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="profile-firefly.png" type="image/x-icon"> <!-- Add this line -->
     <style>
+        /* Add this line */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
   :root {
  /* Dark mode variables */
  --primary-color: #FF6500;
@@ -844,7 +847,58 @@ body.light-mode footer {
         color: var(--primary-color); /* Change color on hover */
     }
 }
+/*form styling*/
+/* Ensure form input and textarea text is visible */
+/* Styling for the contact form */
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto; /* Center the form horizontally */
+    padding: 1.5rem;
+    background-color: var(--light-dark-bg); /* Light background */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Add spacing between form elements */
+}
 
+.contact-form label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--primary-color); /* Use primary color for labels */
+}
+
+.contact-form input,
+.contact-form textarea,
+.contact-form select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--primary-color); /* Border with primary color */
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: white; /* Ensure a white background */
+    color: black; /* Black text for readability */
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: rgba(0, 0, 0, 0.6); /* Placeholder text color */
+}
+
+.contact-form button {
+    padding: 0.8rem;
+    background-color: var(--primary-color); /* Button background color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: var(--secondary-color); /* Change color on hover */
+}
 
     </style>
 </head>
@@ -900,8 +954,7 @@ body.light-mode footer {
                     </a>
                 </div>
             </div>
-            <img src="profile-firefly.png" alt="Babu Reddy NR" class="profile-img">
-        </div>
+            <img src="profile-firefly.png" alt="Babu Reddy NR" class="profile-img" loading="lazy">        </div>
     </section>
 
     <section id="about" class="about">
@@ -991,7 +1044,7 @@ body.light-mode footer {
             <h2 class="section-title">Experience</h2>
             <div class="timeline">
                 <div class="timeline-item">
-                    <h3>Trainee Developer</h3>
+                    <h3>Trainee Developer     (Present)</h3>
                     <p>Bluetree Consultancy Services Private Limited</p>
                     <p>Experience: <span id="experience-duration"></span></p>
                 </div>
@@ -1220,9 +1273,6 @@ body.light-mode footer {
         </div>
     </div>
 </div>
-
-               
-        
             </div>
         </section>
     <section id="contact">
@@ -1234,14 +1284,37 @@ body.light-mode footer {
             <p><strong>GitHub:</strong> <a href="https://github.com/babureddynr" target="_blank">github.com/babureddynr</a></p>
             <p><strong>LinkedIn:</strong> <a href="http://linkedin.com/in/babu-reddy-nr-40a0b02b9" target="_blank">LinkedIn Profile</a></p>
         </div>
+        <form id="contact-form" class="contact-form" action="https://formspree.io/f/mrbppnly" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" placeholder="Enter your message" rows="5" required></textarea>
+            
+            <label for="feedback">How did you find us?</label>  
+            <select id="feedback" name="feedback" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="search_engine">LinkedIn</option>
+                <option value="social_media">Naukri</option>
+                <option value="friend">Friend/Colleague</option>
+                <option value="other">Other</option>
+            </select>
+            
+            <button type="submit" class="btn">Submit</button>
+        </form>
     </section>
     
 
     <footer>
         <p>&copy; 2024 Babu Reddy NR. All rights reserved.</p>
     </footer>
-    <button class="theme-toggle" aria-label="Toggle dark/light mode">
+        <button class="theme-toggle" aria-label="Toggle dark/light mode">
         <i class="fas fa-moon"></i>
+    </button>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_TRACKING_ID"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -1356,6 +1429,20 @@ themeToggle.addEventListener('click', () => {
 
 // Set the experience duration
 document.getElementById('experience-duration').textContent = calculateExperience('2024-11-06'); // Joining date (YYYY-MM-DD)
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+    document.body.classList.toggle('light-mode', savedTheme === 'light');
+}
+
+themeToggle.addEventListener('click', () => {
+    const isLightMode = document.body.classList.toggle('light-mode');
+    localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
+});
+
+
+      document.getElementById('contact-form').addEventListener('submit', function (e) {
+        alert('Thank you for your message! Your response has been recorded.');
+    });
 
     </script>
 </body>
