@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Babu Reddy NR - Full Stack Developer</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="icon" href="profile-firefly.png" type="image/x-icon"> <!-- Add this line -->
+    <link rel="icon" href="C:\Users\reddy\Downloads\B_1016_BR_Logo.jpg" type="image/x-icon"> <!-- Add this line -->
     <style>
         /* Add this line */
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
@@ -21,9 +21,9 @@
     /* Light mode variables */
     --light-primary-color: #FF6500;
     --light-secondary-color: #1E3E62;
-    --light-accent-color: #ffffff;
+    --light-accent-color: #f5ebe5;
     --light-text-color: #333333;
-    --light-dark-bg: #f5f5f5;
+    --light-dark-bg: #e8e7e4;
 }
 
 
@@ -37,15 +37,227 @@ html {
     scroll-behavior: smooth;
     font-size: 16px;
 }
-
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--dark-bg);
+    color: var(--text-color); /* Text color */
+    background-color: var(--dark-bg); /* Background color for dark mode */
     transition: background-color 0.3s, color 0.3s;
 }
-
+  /* Form status message styling */
+  #my-form-status {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+        }
+        
+        #my-form-status.visible {
+            opacity: 1;
+            max-height: 200px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .success-message {
+            background-color: rgba(72, 187, 120, 0.2);
+            color: #276749;
+            border-left: 4px solid #48bb78;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .error-message {
+            background-color: rgba(245, 101, 101, 0.2);
+            color: #c53030;
+            border-left: 4px solid #f56565;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Loading spinner styles */
+        .spinner {
+            display: inline-block;
+            width: 1.5rem;
+            height: 1.5rem;
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: #007bff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        /* CAPTCHA styling */
+        .captcha-container {
+            margin-bottom: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 1rem;
+            background-color: #f9f9f9;
+        }
+        
+        .captcha-box {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .captcha-text {
+            font-family: 'Courier New', monospace;
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 0.5rem;
+            background: linear-gradient(45deg, #f3f3f3, #e9e9e9);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            user-select: none;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            flex-grow: 1;
+            text-align: center;
+        }
+        
+        .captcha-text::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(0, 0, 0, 0.05) 10px,
+                rgba(0, 0, 0, 0.05) 20px
+            );
+            z-index: 0;
+        }
+        
+        .captcha-text span {
+            position: relative;
+            z-index: 1;
+            display: inline-block;
+            transform: skewX(var(--skew)) translateY(var(--trans));
+        }
+        
+        .refresh-captcha {
+            background: #f0f0f0;
+            border: none;
+            border-radius: 4px;
+            padding: 0.5rem;
+            margin-left: 0.5rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .refresh-captcha:hover {
+            background: #e0e0e0;
+        }
+        
+        #captcha-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        /* Confirmation animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-message {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        
+        /* Success checkmark animation */
+        .checkmark-circle {
+            width: 60px;
+            height: 60px;
+            position: relative;
+            display: inline-block;
+            vertical-align: top;
+            margin-right: 20px;
+        }
+        
+        .checkmark-circle .background {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #48bb78;
+            position: absolute;
+        }
+        
+        .checkmark-circle .checkmark {
+            border-radius: 5px;
+        }
+        
+        .checkmark-circle .checkmark.draw:after {
+            animation-delay: 0.3s;
+            animation-duration: 0.8s;
+            animation-timing-function: ease;
+            animation-name: checkmark;
+            transform: scaleX(-1) rotate(135deg);
+            animation-fill-mode: forwards;
+        }
+        
+        .checkmark-circle .checkmark:after {
+            opacity: 0;
+            height: 30px;
+            width: 15px;
+            transform-origin: left top;
+            border-right: 4px solid white;
+            border-top: 4px solid white;
+            border-radius: 2px !important;
+            content: '';
+            left: 14px;
+            top: 30px;
+            position: absolute;
+        }
+        
+        @keyframes checkmark {
+            0% {
+                height: 0;
+                width: 0;
+                opacity: 1;
+            }
+            20% {
+                height: 0;
+                width: 15px;
+                opacity: 1;
+            }
+            40% {
+                height: 30px;
+                width: 15px;
+                opacity: 1;
+            }
+            100% {
+                height: 30px;
+                width: 15px;
+                opacity: 1;
+            }
+        }
 /* Home Section Styling */
 .home {
     min-height: 100vh;
@@ -479,22 +691,22 @@ body.light-mode .project-card {
 
 /* Footer Styling */
 footer {
-    background-color: var(--accent-color);
-    color: var(--text-color);
+    background-color: var(--accent-color); /* Dark background for footer */
+    color: var(--text-color); /* Light text color for readability */
     text-align: center;
     padding: clamp(1.5rem, 4vw, 2rem) 0;
     font-size: clamp(0.9rem, 1.5vw, 1rem);
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 footer a {
-    color: var(--primary-color);
+    color: var(--primary-color); /* Link color */
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 footer a:hover {
-    color: var(--secondary-color);
+    color: var(--secondary-color); /* Hover color for links */
 }
 
 /* Dark Mode Toggle Button */
@@ -851,19 +1063,19 @@ body.light-mode footer {
 /* Ensure form input and textarea text is visible */
 /* Styling for the contact form */
 .contact-form {
-    max-width: 600px;
+    max-width: 500px; /* Decrease the maximum width */
     margin: 0 auto; /* Center the form horizontally */
-    padding: 1.5rem;
+    padding: 1rem; /* Reduce padding */
     background-color: var(--light-dark-bg); /* Light background */
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    border-radius: 8px; /* Slightly smaller border radius */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
     display: flex;
     flex-direction: column;
-    gap: 1rem; /* Add spacing between form elements */
+    gap: 0.8rem; /* Reduce spacing between form elements */
 }
 
 .contact-form label {
-    font-size: 1rem;
+    font-size: 0.9rem; /* Reduce label font size */
     font-weight: bold;
     color: var(--primary-color); /* Use primary color for labels */
 }
@@ -872,10 +1084,10 @@ body.light-mode footer {
 .contact-form textarea,
 .contact-form select {
     width: 100%;
-    padding: 0.8rem;
+    padding: 0.6rem; /* Reduce padding */
     border: 1px solid var(--primary-color); /* Border with primary color */
-    border-radius: 5px;
-    font-size: 1rem;
+    border-radius: 4px; /* Slightly smaller border radius */
+    font-size: 0.9rem; /* Reduce font size */
     background-color: white; /* Ensure a white background */
     color: black; /* Black text for readability */
 }
@@ -886,12 +1098,12 @@ body.light-mode footer {
 }
 
 .contact-form button {
-    padding: 0.8rem;
+    padding: 0.6rem; /* Reduce button padding */
     background-color: var(--primary-color); /* Button background color */
     color: white;
     border: none;
-    border-radius: 5px;
-    font-size: 1rem;
+    border-radius: 4px; /* Slightly smaller border radius */
+    font-size: 0.9rem; /* Reduce font size */
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -900,9 +1112,54 @@ body.light-mode footer {
     background-color: var(--secondary-color); /* Change color on hover */
 }
 /* Dark mode styles for the contact form */
+/* Dark mode styles for entire form and CAPTCHA */
+body:not(.light-mode) .form-container,
+body:not(.light-mode) .captcha-container {
+    background-color: var(--accent-color);
+    border: 1px solid var(--secondary-color);
+    color: var(--text-color);
+}
+
+body:not(.light-mode) .form-input,
+body:not(.light-mode) #captcha-input {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    border: 1px solid var(--secondary-color);
+}
+
+body:not(.light-mode) .captcha-text {
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    color: var(--text-color);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+body:not(.light-mode) .captcha-text span {
+    color: var(--text-color);
+}
+
+body:not(.light-mode) .form-button,
+body:not(.light-mode) .refresh-captcha {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+body:not(.light-mode) .form-button:hover,
+body:not(.light-mode) .refresh-captcha:hover {
+    background-color: var(--primary-color);
+}
+
+/* Add dark mode styling for labels and other form elements */
+body:not(.light-mode) label,
+body:not(.light-mode) .form-title {
+    color: var(--text-color);
+}
+
+/* Dark mode styles for the contact form */
 body:not(.light-mode) .contact-form {
-    background-color: var(--dark-bg); /* Dark background */
-    color: var(--text-color); /* Light text color */
+    background-color: var(--dark-bg); /* Ensure a visible dark background */
+    color: var(--text-color); /* Light text color for readability */
+    border: 1px solid var(--secondary-color); /* Add a border for better visibility */
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2); /* Subtle white shadow for depth */
 }
 
 body:not(.light-mode) .contact-form input,
@@ -921,6 +1178,11 @@ body:not(.light-mode) .contact-form textarea::placeholder {
 body:not(.light-mode) .contact-form button {
     background-color: var(--secondary-color); /* Adjust button background */
     color: var(--text-color); /* Light text color */
+    border: 1px solid var(--secondary-color); /* Add border for better visibility */
+}
+
+body:not(.light-mode) .contact-form button:hover {
+    background-color: var(--primary-color); /* Change button color on hover */
 }
 /* Parallax Effect for the Home Section */
 .home {
@@ -951,6 +1213,11 @@ body:not(.light-mode) .contact-form button {
     -webkit-backdrop-filter: blur(0.5px);
     z-index: 1;
 }
+
+
+/* Popup Modal Styling */
+/* Popup Modal Styling */
+
     </style>
 </head>
 <body>
@@ -1004,9 +1271,11 @@ body:not(.light-mode) .contact-form button {
                     <a href="http://linkedin.com/in/babu-reddy-nr-40a0b02b9" class="btn">
                         <i class="fab fa-linkedin"></i> LinkedIn
                     </a>
+                
+               <a href="#contact" class="btn hire-me">Hire Me</a>
                 </div>
             </div>
-            <img src="profile-firefly.png" alt="Babu Reddy NR" class="profile-img" loading="lazy">
+            <img src="C:\Users\reddy\Downloads\up-profilr.PNG" alt="Babu Reddy NR" class="profile-img" loading="lazy">
         </div>
     </section>
 
@@ -1328,40 +1597,65 @@ body:not(.light-mode) .contact-form button {
 </div>
             </div>
         </section>
-    <section id="contact">
-        <h2 class="section-title">Contact Me</h2>
-        <form id="contact-form" class="contact-form" action="https://formspree.io/f/mrbppnly" method="POST">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" placeholder="Enter your name" required>
-            
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
-            
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" placeholder="Enter your message" rows="5" required></textarea>
-            
-            <label for="feedback">How did you find us?</label>  
-            <select id="feedback" name="feedback" required>
-                <option value="" disabled selected>Select an option</option>
-                <option value="search_engine">LinkedIn</option>
-                <option value="social_media">Naukri</option>
-                <option value="friend">Friend/Colleague</option>
-                <option value="other">Other</option>
-            </select>
-            
-            <button type="submit" class="btn">Submit</button>
-        </form>
-    </section>
+        <section id="contact">
+            <h2 class="section-title">Contact Me</h2>
+            <form id="my-form" class="contact-form" action="https://formspree.io/f/mrbppnly" method="POST">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" placeholder="Enter your message" rows="5" required></textarea>
+                
+                <label for="feedback">How did you find us?</label>  
+                <select id="feedback" name="feedback" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="linkedin">LinkedIn</option>
+                    <option value="naukri">Naukri</option>
+                    <option value="friend">Friend/Colleague</option>
+                    <option value="other">Other</option>
+                </select>
+                
+                <!-- CAPTCHA Section -->
+                <div class="captcha-container">
+                    <label for="captcha-input">Please verify you're human:</label>
+                    <div class="captcha-box">
+                        <div id="captcha" class="captcha-text"></div>
+                        <button type="button" id="refresh-captcha" class="refresh-captcha" aria-label="Refresh CAPTCHA">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                    <input type="text" id="captcha-input" name="captcha" placeholder="Enter the code above" required>
+                </div>
+                
+                <button type="submit" id="submit-btn" class="btn">
+                    <span id="spinner" class="spinner hidden"></span>
+                    <span id="button-text">Submit</span>
+                </button>
+            </form>
+            <div id="my-form-status"></div> <!-- Status message container -->
+        </section>
     
-
-    <footer>
-        <p>&copy; 2024 Babu Reddy NR. All rights reserved.</p>
-    </footer>
+        <footer>
+            <p>&copy; 2024 Babu Reddy NR. All rights reserved.</p>
+        </footer>
+        
         <button class="theme-toggle" aria-label="Toggle dark/light mode">
-        <i class="fas fa-moon"></i>
-    </button>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_TRACKING_ID"></script>
-
+            <i class="fas fa-moon"></i>
+        </button>
+              <!-- Hire Me Popup Modal -->
+    <div id="hire-popup" class="popup hidden">
+        <div class="popup-content">
+            <h2>Let's Collaborate!</h2>
+            <p>Are you in search of a passionate Full Stack Developer to bring your ideas to life? I specialize in HTML, CSS, JavaScript, Java, Spring Boot, MySQL, and more!</p>
+            <div class="popup-buttons">
+                <button id="hire-me-btn" class="btn btn-primary">Let's Get Started</button>
+                <button id="close-popup-btn" class="btn btn-secondary">Not Now</button>
+            </div>
+        </div>
+    </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Redirect to home (top of the page) on reload if there's a hash in the URL
@@ -1383,136 +1677,272 @@ body:not(.light-mode) .contact-form button {
                     history.pushState(null, null, ' ');
                 });
             });
-        });
-    
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+
+            // Mobile menu toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
             const navLinks = document.querySelector('.nav-links');
-    
-            mobileMenuToggle.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
+            
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                });
+            }
+            
+            // Close menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                });
             });
-        });
-        document.addEventListener('DOMContentLoaded', function() {
-        // Original JavaScript remains
-
-     // Dark mode toggle functionality
-const themeToggle = document.querySelector('.theme-toggle');
-const themeIcon = themeToggle.querySelector('i');
-
-// Set default theme to light mode
-document.body.classList.add('light-mode');  // Ensure the body starts with light mode
-
-themeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('light-mode');
-    if (document.body.classList.contains('light-mode')) {
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
-    } else {
-        themeIcon.classList.remove('fa-sun');
-        themeIcon.classList.add('fa-moon');
-    }
-});
-
-
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
+            
+            // Dark mode toggle functionality
+            const themeToggle = document.querySelector('.theme-toggle');
+            const themeIcon = themeToggle.querySelector('i');
+            
+            // Load saved theme preference
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.body.classList.toggle('light-mode', savedTheme === 'light');
+                if (savedTheme === 'light') {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                }
+            } else {
+                // Set default theme to light mode
+                document.body.classList.add('light-mode');
+            }
+            
+            themeToggle.addEventListener('click', () => {
+                const isLightMode = document.body.classList.toggle('light-mode');
+                localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
+                
+                if (isLightMode) {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                } else {
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
                 }
             });
-        }, observerOptions);
-
-        // Add fade-in class and observe all sections
-        document.querySelectorAll('section').forEach(section => {
-            section.classList.add('fade-in');
-            observer.observe(section);
+            
+            // Intersection Observer for fade-in animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            // Add fade-in class and observe all sections
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.add('fade-in');
+                observer.observe(section);
+            });
+            
+            // Calculate experience duration
+            function calculateExperience(joinDate) {
+                const startDate = new Date(joinDate); // Joining date
+                const currentDate = new Date(); // Current date
+                const diffInMs = currentDate - startDate;
+                
+                // Calculate years, months, and days
+                const years = Math.floor(diffInMs / (1000 * 60 * 60 * 24 * 365.25));
+                const months = Math.floor((diffInMs % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.4375));
+                const days = Math.floor((diffInMs % (1000 * 60 * 60 * 24 * 30.4375)) / (1000 * 60 * 60 * 24));
+                
+                // Return formatted experience
+                return `${years} years, ${months} months, and ${days} days`;
+            }
+            
+            // Set the experience duration
+            const experienceDuration = document.getElementById('experience-duration');
+            if (experienceDuration) {
+                experienceDuration.textContent = calculateExperience('2024-11-06'); // Joining date (YYYY-MM-DD)
+            }
+            
+            // Wave effect on mouse move
+            const waveContainer = document.querySelector('.wave-effect');
+            if (waveContainer) {
+                document.addEventListener('mousemove', function(e) {
+                    const wave = document.createElement('div');
+                    wave.className = 'wave';
+                    wave.style.left = `${e.clientX}px`;
+                    wave.style.top = `${e.clientY}px`;
+                    
+                    waveContainer.appendChild(wave);
+                    
+                    // Remove the wave after the animation ends
+                    wave.addEventListener('animationend', () => {
+                        wave.remove();
+                    });
+                });
+            }
+            
+            // Form submission handling - FIXED
+            // CAPTCHA generation and validation
+            const captchaEl = document.getElementById('captcha');
+            const refreshBtn = document.getElementById('refresh-captcha');
+            const captchaInput = document.getElementById('captcha-input');
+            let captchaText = '';
+            
+            // Generate random CAPTCHA
+            function generateCaptcha() {
+                const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';
+                captchaText = '';
+                captchaEl.innerHTML = '';
+                
+                for (let i = 0; i < 6; i++) {
+                    const randomChar = chars.charAt(Math.floor(Math.random() * chars.length));
+                    captchaText += randomChar;
+                    
+                    // Create span for each character with random transformation
+                    const span = document.createElement('span');
+                    span.textContent = randomChar;
+                    
+                    // Add some random skew and vertical position for each character
+                    const skew = Math.floor(Math.random() * 21) - 10; // -10 to 10 degrees
+                    const trans = Math.floor(Math.random() * 11) - 5; // -5 to 5 pixels
+                    
+                    span.style.setProperty('--skew', `${skew}deg`);
+                    span.style.setProperty('--trans', `${trans}px`);
+                    
+                    captchaEl.appendChild(span);
+                }
+            }
+            
+            // Initialize CAPTCHA
+            if (captchaEl && refreshBtn) {
+                generateCaptcha();
+                
+                // Refresh CAPTCHA when button is clicked
+                refreshBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    generateCaptcha();
+                });
+            }
+            
+            // Form submission handling with CAPTCHA validation
+            const form = document.getElementById("my-form");
+            const status = document.getElementById("my-form-status");
+            const submitBtn = document.getElementById("submit-btn");
+            const spinner = document.getElementById("spinner");
+            const buttonText = document.getElementById("button-text");
+            
+            if (form) {
+                form.addEventListener("submit", async function(event) {
+                    event.preventDefault();
+                    
+                    // Validate CAPTCHA
+                    if (captchaInput && captchaInput.value.trim() !== captchaText) {
+                        status.textContent = "Incorrect CAPTCHA code. Please try again.";
+                        status.className = "error-message visible";
+                        generateCaptcha(); // Reset CAPTCHA after failed attempt
+                        captchaInput.value = "";
+                        captchaInput.focus();
+                        return;
+                    }
+                    
+                    // Show loading spinner
+                    spinner.classList.remove("hidden");
+                    buttonText.textContent = "Sending...";
+                    submitBtn.disabled = true;
+                    status.className = "";
+                    status.textContent = "";
+                    
+                    try {
+                        const formData = new FormData(form);
+                        // Remove the CAPTCHA value before sending to Formspree
+                        formData.delete('captcha');
+                        
+                        const response = await fetch(form.action, {
+                            method: form.method,
+                            body: formData,
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+                        
+                        if (response.ok) {
+                            // Success with animated checkmark
+                            status.innerHTML = `
+                                <div class="checkmark-circle">
+                                    <div class="background"></div>
+                                    <div class="checkmark draw"></div>
+                                </div>
+                                <div>
+                                    <strong>Thank you for your message!</strong>
+                                    <p>Your submission has been received successfully. I will get back to you soon.</p>
+                                </div>
+                            `;
+                            status.className = "success-message visible animate-message";
+                            form.reset();
+                            generateCaptcha(); // Reset CAPTCHA after successful submission
+                        } else {
+                            // Server error
+                            const data = await response.json();
+                            let errorMessage = "Oops! There was a problem submitting your form.";
+                            
+                            if (data && data.errors) {
+                                errorMessage = data.errors.map(error => error.message).join(", ");
+                            }
+                            
+                            status.textContent = errorMessage;
+                            status.className = "error-message visible animate-message";
+                        }
+                    } catch (error) {
+                        // Network error
+                        status.textContent = "Oops! There was a problem submitting your form. Please try again later.";
+                        status.className = "error-message visible animate-message";
+                        console.error("Form submission error:", error);
+                    } finally {
+                        // Hide loading spinner
+                        spinner.classList.add("hidden");
+                        buttonText.textContent = "Submit";
+                        submitBtn.disabled = false;
+                        
+                        // Scroll to status message
+                        status.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                });
+            }
         });
-    });
 
-    //hamburger
-    document.addEventListener('DOMContentLoaded', function() {
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const navLinks = document.querySelector('.nav-links');
 
-    mobileMenuBtn.addEventListener('click', function() {
-        navLinks.classList.toggle('active');
-    });
-
-    // Close menu when clicking a link
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', function() {
-            navLinks.classList.remove('active');
+            document.addEventListener('DOMContentLoaded', function () {
+            const popup = document.getElementById('hire-popup');
+            const hireMeBtn = document.getElementById('hire-me-btn');
+            const closePopupBtn = document.getElementById('close-popup-btn');
+        
+            // Function to show the popup
+            function showPopup() {
+                popup.classList.remove('hidden');
+            }
+        
+            // Function to hide the popup
+            function hidePopup() {
+                popup.classList.add('hidden');
+            }
+        
+            // Show the popup every 1 minute (60000ms)
+            setInterval(showPopup, 30000);
+        
+            // Redirect to the contact form when "Hire Me" is clicked
+            hireMeBtn.addEventListener('click', function () {
+                hidePopup();
+                document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+            });
+        
+            // Close the popup when "Close" is clicked
+            closePopupBtn.addEventListener('click', hidePopup);
         });
-    });
-});
-
-        // JavaScript to calculate the experience dynamically
-        function calculateExperience(joinDate) {
-    const startDate = new Date(joinDate); // Joining date
-    const currentDate = new Date(); // Current date
-    const diffInMs = currentDate - startDate;
-    
-    // Calculate years, months, and days
-    const years = Math.floor(diffInMs / (1000 * 60 * 60 * 24 * 365.25));
-    const months = Math.floor((diffInMs % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.4375));
-    const days = Math.floor((diffInMs % (1000 * 60 * 60 * 24 * 30.4375)) / (1000 * 60 * 60 * 24));
-    
-    // Return formatted experience
-    return `${years} years, ${months} months, and ${days} days`;
-}
-
-// Set the experience duration
-document.getElementById('experience-duration').textContent = calculateExperience('2024-11-06'); // Joining date (YYYY-MM-DD)
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-    document.body.classList.toggle('light-mode', savedTheme === 'light');
-}
-
-themeToggle.addEventListener('click', () => {
-    const isLightMode = document.body.classList.toggle('light-mode');
-    localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
-});
-
-
-      document.getElementById('contact-form').addEventListener('submit', function (e) {
-        alert('Thank you for your message! Your response has been recorded.');
-    });
-document.getElementById('contact-form').addEventListener('submit', function (e) {
-    e.preventDefault(); // Prevent the default form submission
-
-    // Show a success message
-    alert('Thank you for your message! Your response has been recorded.');
-
-    // Refresh the page after a short delay
-    setTimeout(() => {
-        location.reload();
-    }, 1000); // 1-second delay before refreshing
-});
-
-    document.addEventListener('mousemove', function (e) {
-        const waveContainer = document.querySelector('.wave-effect');
-        const wave = document.createElement('div');
-        wave.className = 'wave';
-        wave.style.left = `${e.clientX}px`;
-        wave.style.top = `${e.clientY}px`;
-
-        waveContainer.appendChild(wave);
-
-        // Remove the wave after the animation ends
-        wave.addEventListener('animationend', () => {
-            wave.remove();
-        });
-    });
-</script>
-
+    </script>
 </body>
 </html>
