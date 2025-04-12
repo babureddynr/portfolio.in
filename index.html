@@ -1214,9 +1214,92 @@ body:not(.light-mode) .contact-form button:hover {
     z-index: 1;
 }
 
+/* Popup Modal Styling */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Darker overlay for better focus */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition for appearance */
+    backdrop-filter: blur(5px); /* Adds a blur effect to the background */
+}
 
-/* Popup Modal Styling */
-/* Popup Modal Styling */
+.popup.hidden {
+    display: none;
+}
+
+.popup-content {
+    background: linear-gradient(135deg, #ffffff, #f9f9f9); /* Subtle gradient for a modern look */
+    padding: 2.5rem; /* Increased padding for better spacing */
+    border-radius: 15px; /* Softer rounded corners */
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* Deeper shadow for a floating effect */
+    animation: popupFadeIn 0.5s ease; /* Animation for popup appearance */
+}
+
+.popup-content h2 {
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    font-size: 1.8rem; /* Slightly larger font size */
+    font-weight: bold;
+    text-transform: uppercase; /* Adds emphasis */
+}
+
+.popup-content p {
+    margin-bottom: 2rem;
+    color: #555; /* Softer text color for readability */
+    font-size: 1rem;
+    line-height: 1.6; /* Improved line spacing */
+}
+
+.popup-content .btn {
+    margin: 0.5rem;
+    padding: 0.8rem 2rem; /* Wider buttons for better usability */
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px; /* Softer button corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+}
+
+.popup-content .btn:hover {
+    opacity: 0.9;
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+.popup-content .btn:first-child {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 10px rgba(255, 101, 0, 0.3); /* Subtle glow effect */
+}
+
+.popup-content .btn:last-child {
+    background-color: #e0e0e0;
+    color: #333;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for contrast */
+}
+
+.popup-content .btn:last-child:hover {
+    background-color: #d6d6d6; /* Slightly darker on hover */
+}
+
+/* Popup Fade-In Animation */
+@keyframes popupFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8); /* Start smaller */
+    }
+    to {
+        opacity: 1;
+        transform: scale(1); /* Full size */
+    }
+}
 
     </style>
 </head>
@@ -1649,10 +1732,15 @@ body:not(.light-mode) .contact-form button:hover {
     <div id="hire-popup" class="popup hidden">
         <div class="popup-content">
             <h2>Let's Collaborate!</h2>
-            <p>Are you in search of a passionate Full Stack Developer to bring your ideas to life? I specialize in HTML, CSS, JavaScript, Java, Spring Boot, MySQL, and more!</p>
-            <div class="popup-buttons">
-                <button id="hire-me-btn" class="btn btn-primary">Let's Get Started</button>
-                <button id="close-popup-btn" class="btn btn-secondary">Not Now</button>
+            <p>Are you in search of a passionate Full Stack Developer to bring your ideas to life? I specialize in:</p>
+            <ul style="text-align: left; margin: 1rem 0; padding-left: 1.5rem;">
+                <li>HTML, CSS, JavaScript</li>
+                <li>Java, Spring Boot</li>
+                <li>MySQL and more!</li>
+            </ul>
+            <div class="popup-buttons" style="display: flex; justify-content: center; gap: 1rem; margin-top: 1rem;">
+                <button id="hire-me-btn" class="btn btn-primary" style="padding: 0.8rem 1.5rem;">Let's Get Started</button>
+                <button id="close-popup-btn" class="btn btn-secondary" style="padding: 0.8rem 1.5rem;">Not Now</button>
             </div>
         </div>
     </div>
